@@ -4,14 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank; // 추가
 
 @Entity
 public class Todo {
-    @Id // 기본키(Primary Key) 설정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID 자동 생성 전략
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String content; // 내가 입력한 할 일
-    private boolean completed; // 할 일의 완료 여부
+
+    @NotBlank(message = "내용을 입력해주세요.") // 할 일 내용이 비어있으면 안 됨
+    private String content;
+    private boolean completed;
 
     // 기본 생성자 (필수)
     public Todo() {
